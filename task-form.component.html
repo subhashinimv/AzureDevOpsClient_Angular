@@ -1,0 +1,33 @@
+
+html
+Copy code
+<div class="container mt-4">
+  <h2 class="text-center mb-4">{{ task ? 'Edit Task' : 'Create Task' }}</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Task ID</label>
+      <input type="text" class="form-control" id="id" [(ngModel)]="task.title" name="id" required>
+    </div>
+    <div class="mb-3">
+      <label for="title" class="form-label">Task Title</label>
+      <input type="text" class="form-control" id="title" [(ngModel)]="task.title" name="title" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select class="form-control" id="status" [(ngModel)]="task.state" name="status">
+        <option value="New">New</option>
+        <option value="InProgress">InProgress</option>
+        <option value="Completed">Completed</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="effort" class="form-label">Effort</label>
+      <input type="number" class="form-control" id="effort" [(ngModel)]="task.effort" name="effort" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ task ? 'Update Task' : 'Create Task' }}</button>
+  </form>
+</div>

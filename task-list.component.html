@@ -1,0 +1,61 @@
+<div class="container mt-4">
+  <div *ngIf="message" class="alert" [ngClass]="{'alert-success': message.type === 'success', 'alert-danger': message.type === 'error'}">
+    {{ message.text }}
+  </div>
+
+  <h2 class="text-center mb-4">Task List</h2>
+
+  <!-- Add Create New Task Button -->
+  <div class="text-end mb-3">
+    <a routerLink="/tasks/new" class="btn btn-primary">Create New Task</a>
+  </div>
+
+  <!-- Task Table with Inline Editing -->
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Status</th>
+        <th scope="col">Effort</th>
+        <th scope="col">Completion Date</th>
+        <th scope="col">Remaining Work</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks; let i = index">
+        <td>{{ task.id }}</td>
+        <td>
+          <input *ngIf="task.isEditing" type="text" class="form-control" [(ngModel)]="task.title" />
+          <span *ngIf="!task.isEditing">{{ task.title }}</span>
+        </td>
+
+        <td>
+          <select *ngIf="task.isEditing" class="form-control" [(ngModel)]="task.state">
+            <option value="New">New</option>
+            <option value="InProgress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+          <span *ngIf="!task.isEditing">{{ task.state }}</span>
+        </td>
+        <td>
+          <input *ngIf="task.isEditing" type="number" class="form-control" [(ngModel)]="task.effort" />
+          <span *ngIf="!task.isEditing">{{ task.effort }}</span>
+        </td>
+        <td>
+          <input *ngIf="task.isEditing" type="datetime" class="form-control" [(ngModel)]="task.completionDate" />
+          <span *ngIf="!task.isEditing">{{ task.completionDate | date }}</span>
+        </td>
+        <td>
+          <input *ngIf="task.isEditing" type="number" class="form-control" [(ngModel)]="task.remainingWork" />
+          <span *ngIf="!task.isEditing">{{ task.remainingWork }}</span>
+        </td>
+        <td>
+          <button *ngIf="!task.isEditing" (click)="editTask(i)" class="btn btn-warning btn-sm">Edit</button>
+          <button *ngIf="task.isEditing" (click)="saveTask(i)" class="btn btn-success btn-sm">Save</button>
+          <button *ngIf="task.isEditing" (click)="cancelEdit(i)" class="btn btn-secondary btn-sm">Cancel</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
