@@ -1,0 +1,16 @@
+<header>
+    <nav>
+      <ul>
+        <li><a [routerLink]="'/tasks'">Task List</a></li>
+        <li><a [routerLink]="'/tasks/new'">Create Task</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+   <main>
+    <router-outlet></router-outlet>  <!-- Routed components will be injected -->
+  </main>
+  
+  <footer>
+    <p>Task Management Application</p>
+  </footer>
